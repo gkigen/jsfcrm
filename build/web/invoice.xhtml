@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Invoice</title>
+         <style>
+            .oddrow{
+              background-color:#ccc;   
+            }
+            .evenrow{
+                background-color:#ff8; 
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1><h:outputText value="List"/></h1>
+            <h:dataTable rowClasses="oddrow,evenrow" value="#{invoiceBean.invoicelist}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Aid"/>
+                    </f:facet>
+                    <h:outputText  value="#{item.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Invoice no"/>
+                    </f:facet>
+                    <h:outputText rendered="#{invoiceBean.selectedinvoice ne item}" value="#{item.invoiceno}"/>
+                    <h:inputText rendered="#{invoiceBean.selectedinvoice eq item}" value="#{item.invoiceno}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Invoice Title"/>
+                    </f:facet>
+                    <h:outputText rendered="#{invoiceBean.selectedinvoice ne item}" value="#{item.name}"/>
+                    <h:inputText rendered="#{invoiceBean.selectedinvoice eq item}" value="#{item.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Description"/>
+                    </f:facet>
+                    <h:outputText rendered="#{invoiceBean.selectedinvoice ne item}" value="#{item.description}"/>
+                    <h:inputText rendered="#{invoiceBean.selectedaccount eq item}" value="#{item.description}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Date"/>
+                    </f:facet>
+                    <h:outputText rendered="#{invoiceBean.selectedinvoice ne item}" value="#{item.date}"/>
+                    <h:inputText rendered="#{invoiceBean.selectedinvoice eq item}" value="#{item.date}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Due Date"/>
+                    </f:facet>
+                    <h:outputText rendered="#{invoiceBean.selectedinvoice ne item}" value="#{item.duedate}"/>
+                    <h:inputText rendered="#{invoiceBean.selectedinvoice eq item}" value="#{item.duedate}"/>
+                     </h:column>            
+                      <h:column>
+                      <f:facet name="header">
+                      <h:outputText  value="Qoute no"/>
+
+                        </f:facet>
+                          <h:outputText rendered="#{invoiceBean.selectedinvoice ne item}" value="#{item.quoteno}"/>
+                          <h:inputText rendered="#{invoiceBean.selectedinvoice eq item}" value="#{item.quoteno}"/>
+                </h:column>
+                 <h:column>
+                      <f:facet name="header">
+                      <h:outputText  value="Ammount"/>
+
+                        </f:facet>
+                     <h:outputText rendered="#{invoiceBean.selectedinvoice ne item}" value="#{item.ammount}"/>
+                     <h:inputText rendered="#{invoiceBean.selectedinvoice eq item}" value="#{item.ammount}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText rendered="#{invoiceBean.selectedinvoice ne item}" value="Delete"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{invoiceBean.selectedinvoice ne item}" value="Delete" action="#{invoiceBean.removeinvoice(invoiceid)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Update"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{invoiceBean.selectedinvoice eq item}" value="Update" action="#{invoiceBean.modifyinvoice()}"/>
+                    <h:commandButton rendered="#{invoiceBean.selectedinvoice ne item}" value="Edit" action="#{invoiceBean.selectformodification(a)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:panelGrid columns="2" >
+            <h:outputLabel value="Invoice no : "/>
+            <h:inputText value="#{invoiceBean.selectedinvoice.invoiceno}"/>
+         <h:outputLabel value="Invoice Title:"/>
+         <h:inputText value="#{invoiceBean.selectedinvoice.name}"/>
+         <h:outputLabel value="Description : "/>
+         <h:inputText value="#{invoiceBean.selectedinvoice.description}"/>
+         <h:outputLabel value="Date : "/>
+         <h:inputText value="#{invoiceBean.selectedinvoice.date}">
+              
+         </h:inputText>
+         <h:outputLabel value="Due Date : "/>
+         <h:inputText value="#{invoiceBean.selectedinvoice.duedate}"/>
+         <h:outputLabel value="Quote no : "/>
+         <h:inputText value="#{invoiceBean.selectedinvoice.quoteno}"/>
+         <h:outputLabel value="Ammount : "/>
+         <h:inputText value="#{invoiceBean.selectedinvoice.ammount}"/>
+         </h:panelGrid>
+       <h:commandButton value="Add New Invoice"                                  
+                        action="#{invoiceBean.addNew}"/>   
+        </h:form>
+
+    </h:body>
+</html>
+

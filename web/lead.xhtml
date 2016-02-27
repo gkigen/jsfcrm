@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Leads</title>
+         <style>
+            .oddrow{
+              background-color:#ccc;   
+            }
+            .evenrow{
+                background-color:#ff8; 
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1><h:outputText value="List"/></h1>
+            <h:dataTable rowClasses="oddrow,evenrow" value="#{leadBean.leadlist}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Aid"/>
+                    </f:facet>
+                    <h:outputText  value="#{item.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Company"/>
+                    </f:facet>
+                    <h:outputText rendered="#{leadBean.selectedlead ne item}" value="#{item.company}"/>
+                    <h:inputText rendered="#{leadBean.selectedlead eq item}" value="#{item.company}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Address"/>
+                    </f:facet>
+                    <h:outputText rendered="#{leadBean.selectedlead ne item}" value="#{item.address}"/>
+                    <h:inputText rendered="#{leadBean.selectedlead eq item}" value="#{item.address}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Email"/>
+                    </f:facet>
+                    <h:outputText rendered="#{leadBean.selectedlead ne item}" value="#{item.email}"/>
+                    <h:inputText rendered="#{leadBean.selectedlead eq item}" value="#{item.email}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Mobile"/>
+                    </f:facet>
+                    <h:outputText rendered="#{leadBean.selectedlead ne item}" value="#{item.mobile}"/>
+                    <h:inputText rendered="#{leadBean.selectedlead eq item}" value="#{item.mobile}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="County"/>
+                    </f:facet>
+                    <h:outputText rendered="#{leadBean.selectedlead ne item}" value="#{item.county}"/>
+                    <h:inputText rendered="#{leadBean.selectedlead eq item}" value="#{item.county}"/>
+                     </h:column>            
+                      <h:column>
+                      <f:facet name="header">
+                      <h:outputText  value="Lead Source"/>
+
+                        </f:facet>
+                          <h:outputText rendered="#{leadBean.selectedlead ne item}" value="#{item.leadsource}"/>
+                          <h:inputText rendered="#{leadBean.selectedlead eq item}" value="#{item.leadsource}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Street"/>
+                    </f:facet>
+                    <h:outputText rendered="#{leadBean.selectedlead ne item}" value="#{item.street}"/>
+                    <h:inputText rendered="#{leadBean.selectedlead eq item}" value="#{item.street}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Converted"/>
+                    </f:facet>
+                    <h:outputText rendered="#{leadBean.selectedlead ne item}" value="#{item.converted}"/>
+                    <h:inputText rendered="#{leadBean.selectedlead eq item}" value="#{item.converted}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText rendered="#{leadBean.selectedlead ne item}" value="Delete"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{leadBean.selectedlead ne item}" value="Delete" action="#{leadBean.removelead(leadid)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Update"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{leadBean.selectedlead eq item}" value="Update" action="#{leadBean.modifylead()}"/>
+                    <h:commandButton rendered="#{leadBean.selectedlead ne item}" value="Edit" action="#{leadBean.selectformodification(a)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:panelGrid columns="2" >
+            <h:outputLabel value="Company : "/>
+            <h:inputText value="#{leadBean.selectedlead.company}"/>
+         <h:outputLabel value="Address:"/>
+         <h:inputText value="#{leadBean.selectedlead.address}"/>
+         <h:outputLabel value="Email : "/>
+         <h:inputText value="#{leadBean.selectedlead.email}"/>
+         <h:outputLabel value="Mobile : "/>
+         <h:inputText value="#{leadBean.selectedlead.mobile}">
+              
+         </h:inputText>
+         <h:outputLabel value="Lead Source : "/>
+         <h:inputText value="#{leadBean.selectedlead.leadsource}"/>
+         <h:outputLabel value="County : "/>
+         <h:inputText value="#{leadBean.selectedlead.county}"/>
+         <h:outputLabel value="Converted : "/>
+         <h:inputText value="#{leadBean.selectedlead.converted}"/>
+       </h:panelGrid>
+       <h:commandButton value="Add New Lead"                                  
+                        action="#{leadBean.addNew}"/>   
+        </h:form>
+
+    </h:body>
+</html>
+

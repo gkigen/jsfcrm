@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Products</title>
+         <style>
+            .oddrow{
+              background-color:#ccc;   
+            }
+            .evenrow{
+                background-color:#ff8; 
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1><h:outputText value="List"/></h1>
+            <h:dataTable rowClasses="oddrow,evenrow" value="#{productBean.productlist}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id"/>
+                    </f:facet>
+                    <h:outputText  value="#{item.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Asset Number"/>
+                    </f:facet>
+                    <h:outputText rendered="#{productBean.selectedproduct ne item}" value="#{item.assetnumber}"/>
+                    <h:inputText rendered="#{productBean.selectedproduct eq item}" value="#{item.assetnumber}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="List Price"/>
+                    </f:facet>
+                    <h:outputText rendered="#{productBean.selectedproduct ne item}" value="#{item.listprice}"/>
+                    <h:inputText rendered="#{productBean.selectedproduct eq item}" value="#{item.listprice}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Account"/>
+                    </f:facet>
+                    <h:outputText rendered="#{productBean.selectedproduct ne item}" value="#{item.account}"/>
+                    <h:inputText rendered="#{productBean.selectedproduct eq item}" value="#{item.account}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Category"/>
+                    </f:facet>
+                    <h:outputText rendered="#{productBean.selectedproduct ne item}" value="#{item.category}"/>
+                    <h:inputText rendered="#{productBean.selectedproduct eq item}" value="#{item.category}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="County"/>
+                    </f:facet>
+                    <h:outputText rendered="#{productBean.selectedproduct ne item}" value="#{item.county}"/>
+                    <h:inputText rendered="#{productBean.selectedproduct eq item}" value="#{item.county}"/>
+                     </h:column>            
+                      <h:column>
+                      <f:facet name="header">
+                      <h:outputText  value="Discount"/>
+
+                        </f:facet>
+                          <h:outputText rendered="#{productBean.selectedproduct ne item}" value="#{item.discount}"/>
+                          <h:inputText rendered="#{productBean.selectedproduct eq item}" value="#{item.discount}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Name"/>
+                    </f:facet>
+                    <h:outputText rendered="#{productBean.selectedproduct ne item}" value="#{item.name}"/>
+                    <h:inputText rendered="#{productBean.selectedproduct eq item}" value="#{item.name}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quantity"/>
+                    </f:facet>
+                    <h:outputText rendered="#{productBean.selectedproduct ne item}" value="#{item.quantity}"/>
+                    <h:inputText rendered="#{productBean.selectedproduct eq item}" value="#{item.quantity}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Purchase Date"/>
+                    </f:facet>
+                    <h:outputText rendered="#{productBean.selectedproduct ne item}" value="#{item.purchasedate}"/>
+                    <h:inputText rendered="#{productBean.selectedproduct eq item}" value="#{item.purchasedate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Status"/>
+                    </f:facet>
+                    <h:outputText rendered="#{productBean.selectedproduct ne item}" value="#{item.status}"/>
+                    <h:inputText rendered="#{productBean.selectedproduct eq item}" value="#{item.status}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText rendered="#{productBean.selectedproduct ne item}" value="Delete"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{productBean.selectedproduct ne item}" value="Delete" action="#{productBean.removeproduct(productid)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Update"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{productBean.selectedproduct eq item}" value="Update" action="#{productBean.modifyproduct()}"/>
+                    <h:commandButton rendered="#{productBean.selectedproduct ne item}" value="Edit" action="#{productBean.selectformodification(item)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:panelGrid columns="2" >
+            <h:outputLabel value="Company : "/>
+            <h:inputText value="#{productBean.selectedproduct.assetnumber}"/>
+         <h:outputLabel value="Address:"/>
+         <h:inputText value="#{productBean.selectedproduct.listprice}"/>
+         <h:outputLabel value="Email : "/>
+         <h:inputText value="#{productBean.selectedproduct.account}"/>
+         <h:outputLabel value="Mobile : "/>
+         <h:inputText value="#{productBean.selectedproduct.category}">
+              
+         </h:inputText>
+         <h:outputLabel value="Industry : "/>
+         <h:inputText value="#{productBean.selectedproduct.discount}"/>
+         <h:outputLabel value="County : "/>
+         <h:inputText value="#{productBean.selectedproduct.name}"/>
+         <h:outputLabel value="County : "/>
+         <h:inputText value="#{productBean.selectedproduct.quantity}"/>
+         <h:outputLabel value="County : "/>
+         <h:inputText value="#{productBean.selectedproduct.purchasedate}"/>
+         <h:outputLabel value="County : "/>
+         <h:inputText value="#{productBean.selectedproduct.status}"/>
+       </h:panelGrid>
+       <h:commandButton value="Add New Product"                                  
+                        action="#{productBean.addNew}"/>   
+        </h:form>
+
+    </h:body>
+</html>
+

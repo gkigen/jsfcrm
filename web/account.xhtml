@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <style>
+            .oddrow{
+                background-color:#ccc;   
+            }
+            .evenrow{
+                background-color:#ff8; 
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:outputText value="Sales"/>
+        <h:link value="Leads" outcome="lead" />
+        <h:link value="Contacts" outcome="contact" />
+        <h:outputText value="Marketing"/>
+        <h:link value="Cases" outcome="case" />
+        <h:link value="Opportunities" outcome="opportunity" />
+         <h:link value="Invoices" outcome="invoice" />
+          <h:link value="Quotes" outcome="quote" />
+           <h:link value="Products" outcome="product" />
+        <h:form>
+            <h1><h:outputText value="List"/></h1>
+            <h:dataTable rowClasses="oddrow,evenrow" value="#{accountBean.accountlist}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Aid"/>
+                    </f:facet>
+                    <h:outputText  value="#{item.aid}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Company"/>
+                    </f:facet>
+                    <h:outputText rendered="#{accountBean.selectedaccount ne item}" value="#{item.company}"/>
+                    <h:inputText rendered="#{accountBean.selectedaccount eq item}" value="#{item.company}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Address"/>
+                    </f:facet>
+                    <h:outputText rendered="#{accountBean.selectedaccount ne item}" value="#{item.address}"/>
+                    <h:inputText rendered="#{accountBean.selectedaccount eq item}" value="#{item.address}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Email"/>
+                    </f:facet>
+                    <h:outputText rendered="#{accountBean.selectedaccount ne item}" value="#{item.email}"/>
+                    <h:inputText rendered="#{accountBean.selectedaccount eq item}" value="#{item.email}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Mobile"/>
+                    </f:facet>
+                    <h:outputText rendered="#{accountBean.selectedaccount ne item}" value="#{item.mobile}"/>
+                    <h:inputText rendered="#{accountBean.selectedaccount eq item}" value="#{item.mobile}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="County"/>
+                    </f:facet>
+                    <h:outputText rendered="#{accountBean.selectedaccount ne item}" value="#{item.county}"/>
+                    <h:inputText rendered="#{accountBean.selectedaccount eq item}" value="#{item.county}"/>
+                </h:column>            
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText  value="Industry"/>
+
+                    </f:facet>
+                    <h:outputText rendered="#{accountBean.selectedaccount ne item}" value="#{item.industry}"/>
+                    <h:inputText rendered="#{accountBean.selectedaccount eq item}" value="#{item.industry}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Street"/>
+                    </f:facet>
+                    <h:outputText rendered="#{accountBean.selectedaccount ne item}" value="#{item.street}"/>
+                    <h:inputText rendered="#{accountBean.selectedaccount eq item}" value="#{item.street}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText rendered="#{accountBean.selectedaccount ne item}" value="Delete"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{accountBean.selectedaccount ne item}" value="Delete" action="#{accountBean.removeaccount(item.aid)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Update"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{accountBean.selectedaccount eq item}" value="Update" action="#{accountBean.modifyaccount}"/>
+                    <h:commandButton rendered="#{accountBean.selectedaccount ne item}" value="Edit" action="#{accountBean.selectformodification(item)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:panelGrid columns="2" >
+                <h:outputLabel value="Company : "/>
+                <h:inputText value="#{accountBean.selectedaccount.company}"/>
+                <h:outputLabel value="Address:"/>
+                <h:inputText value="#{accountBean.selectedaccount.address}"/>
+                <h:outputLabel value="Email : "/>
+                <h:inputText value="#{accountBean.selectedaccount.email}"/>
+                <h:outputLabel value="Mobile : "/>
+                <h:inputText value="#{accountBean.selectedaccount.mobile}">
+
+                </h:inputText>
+                <h:outputLabel value="Industry : "/>
+                <h:inputText value="#{accountBean.selectedaccount.industry}"/>
+                <h:outputLabel value="County : "/>
+                <h:inputText value="#{accountBean.selectedaccount.county}"/>
+            </h:panelGrid>
+            <h:commandButton value="Add New Account"                                  
+                             action="#{accountBean.addNew}"/>  
+
+        </h:form>
+
+    </h:body>
+</html>
+

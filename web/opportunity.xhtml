@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Opportunities</title>
+         <style>
+            .oddrow{
+              background-color:#ccc;   
+            }
+            .evenrow{
+                background-color:#ff8; 
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1><h:outputText value="List"/></h1>
+            <h:dataTable rowClasses="oddrow,evenrow" value="#{opportunityBean.opportlist}" var="item">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id"/>
+                    </f:facet>
+                    <h:outputText  value="#{item.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Name"/>
+                    </f:facet>
+                    <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="#{item.name}"/>
+                    <h:inputText rendered="#{opportunityBean.selectedopport eq item}" value="#{item.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Account"/>
+                    </f:facet>
+                    <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="#{item.account}"/>
+                    <h:inputText rendered="#{opportunityBean.selectedopport eq item}" value="#{item.account}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Close Date"/>
+                    </f:facet>
+                    <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="#{item.closedate}"/>
+                    <h:inputText rendered="#{opportunityBean.selectedopport eq item}" value="#{item.closedate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Type"/>
+                    </f:facet>
+                    <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="#{item.type}"/>
+                    <h:inputText rendered="#{opportunityBean.selectedopport eq item}" value="#{item.type}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Sales Stage"/>
+                    </f:facet>
+                    <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="#{item.salesstage}"/>
+                    <h:inputText rendered="#{opportunityBean.selectedopport eq item}" value="#{item.salesstage}"/>
+                     </h:column>            
+                      <h:column>
+                      <f:facet name="header">
+                      <h:outputText  value="Lead Source"/>
+
+                        </f:facet>
+                          <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="#{item.leadsource}"/>
+                          <h:inputText rendered="#{opportunityBean.selectedopport eq item}" value="#{item.leadsource}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Probability"/>
+                    </f:facet>
+                    <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="#{item.probability}"/>
+                    <h:inputText rendered="#{opportunityBean.selectedopport eq item}" value="#{item.probability}"/>
+                </h:column>
+                
+                 <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Next Step"/>
+                    </f:facet>
+                    <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="#{item.nextstep}"/>
+                    <h:inputText rendered="#{opportunityBean.selectedopport eq item}" value="#{item.nextstep}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Description"/>
+                    </f:facet>
+                    <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="#{item.description}"/>
+                    <h:inputText rendered="#{opportunityBean.selectedopport eq item}" value="#{item.description}"/>
+                </h:column>
+               <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Ammount"/>
+                    </f:facet>
+                   <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="#{item.ammount}"/>
+                   <h:inputText rendered="#{opportunityBean.selectedopport eq item}" value="#{item.ammount}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText rendered="#{opportunityBean.selectedopport ne item}" value="Delete"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{opportunityBean.selectedopport ne item}" value="Delete" action="#{opportunityBean.removeaccount(item.aid)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Update"/>
+                    </f:facet>
+                    <h:commandButton rendered="#{opportunityBean.selectedopport eq item}" value="Update" action="#{opportunityBean.modifyopport()}"/>
+                    <h:commandButton rendered="#{opportunityBean.selectedopport ne item}" value="Edit" action="#{opportunityBean.selectformodification(item)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:panelGrid columns="2" >
+            <h:outputLabel value="Opportunity name : "/>
+            <h:inputText value="#{opportunityBean.selectedopport.name}"/>
+         <h:outputLabel value="Account:"/>
+         <h:inputText value="#{opportunityBean.selectedopport.account}"/>
+         <h:outputLabel value="Close Date : "/>
+         <h:inputText value="#{opportunityBean.selectedopport.closedate}"/>
+        
+         <h:outputLabel value="Type : "/>
+         <h:inputText value="#{opportunityBean.selectedopport.type}"/>
+         <h:outputLabel value="Sales Stage : "/>
+         <h:inputText value="#{opportunityBean.selectedopport.salesstage}"/>
+          <h:outputLabel value="Lead Source : "/>
+         <h:inputText value="#{opportunityBean.selectedopport.leadsource}">
+              
+         </h:inputText>
+          <h:outputLabel value="Probability : "/>
+          <h:inputText value="#{opportunityBean.selectedopport.probability}"/>
+         <h:outputLabel value="Next Step : "/>
+         <h:inputText value="#{opportunityBean.selectedopport.nextstep}"/>
+         <h:outputLabel value="Description : "/>
+         
+         <h:inputText value="#{opportunityBean.selectedopport.description}"/>
+         <h:outputLabel value="Ammount : "/>
+         <h:inputText value="#{opportunityBean.selectedopport.ammount}"/>
+         </h:panelGrid>
+       
+       <h:commandButton value="Add New Opportunity"                                  
+                        action="#{accountBean.addNew}"/>   
+        </h:form>
+
+    </h:body>
+</html>
+
